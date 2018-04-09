@@ -1,0 +1,10 @@
+
+- hosts: all
+  tasks:
+  - name: Pingpong!
+    ping:
+      data: Ghostbusters
+    register: ping_svar
+  - name: "What's the answer?!"
+    debug:
+      msg: "Who're you gonna call? '{{ping_svar.ping}}'"
