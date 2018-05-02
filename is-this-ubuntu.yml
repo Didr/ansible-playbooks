@@ -1,4 +1,4 @@
-  hosts: all
+- hosts: all
   tasks:
   - name: Check if /etc/issue starts with Ubuntu
     lineinfile:
