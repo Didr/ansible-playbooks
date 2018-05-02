@@ -1,9 +1,11 @@
 - hosts: all
   tasks:
-  - name: Get contents of /etc/issue
-    shell: cat /etc/issue
-    register: is_ubuntu
-
   - name: Check if /etc/issue starts with Ubuntu
-    when: is_ubuntu.stdout.find('Ubuntu') != -1
-    debug: msg="This is Ubuntu!"
+    lineinfile:
+      path: /etc/issue
+      line: "Ubuntu"
+      state: present
+    check_mode: yes
+    register: is_ubuntu
+    failed_when: (is_ubuntu | changed) or (is_ubuntu | failed)
+- debug: msg="{{is_ubuntu.stdout_lines}}"
