@@ -1,3 +1,4 @@
+  hosts: all
   tasks:
   - name: Check if /etc/issue starts with Ubuntu
     lineinfile:
@@ -8,4 +9,3 @@
     register: is_ubuntu
     failed_when: (is_ubuntu | changed) or (is_ubuntu | failed)
   - debug: msg="{{is_ubuntu.stdout_lines}}"
-
